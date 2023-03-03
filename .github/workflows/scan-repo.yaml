@@ -7,4 +7,6 @@ jobs:
     with:  
       eid: ${{ vars.EID }}
       oid: ${{ vars.ORGID }}
-    secrets: inherit
+    secrets: 
+      TOKEN: ${{ secrets.TOKEN }}
+      THREATRIX_SERVER_API_KEY: ${{ secrets.THREATRIX_SERVER_API_KEY }}
