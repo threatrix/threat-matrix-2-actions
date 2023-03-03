@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   call-workflow-passing-data:
-    uses: threatrix/threat-agent-scan/.github/workflows/scan-repo-reusable.yaml@main
+    uses: threatrix/threat-agent-scan/.github/workflows/scan-repo-reusable.yaml@master
     with:  
       eid: ${{ vars.EID }}
       oid: ${{ vars.ORGID }}
