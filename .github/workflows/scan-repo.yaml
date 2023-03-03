@@ -20,4 +20,3 @@ jobs:
           api-token: ${{ secrets.THREATRIX_SERVER_API_KEY }}
           app-name: ${{ github.repository }}
           branch: ${{ github.ref_name }}
-          path: ${{ github.workspace }}
