@@ -5,33 +5,16 @@ jobs:
   scan-repository:
     name: Scan repository
     runs-on: ubuntu-latest
-    container:
-      image: threatrix/threat-agent
-      options: --entrypoint "/usr/bin/bash -e {0}"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
       - name: Run scan with threat-agent
-        env:
-          THREATRIX_SERVER_API_KEY: ${{ secrets.THREATRIX_SERVER_API_KEY }}
-          EID: ${{ vars.EID }}
-          OID: ${{ vars.ORGID }}
-          SCM_TOKEN: ${{ secrets.TOKEN }}
-          BRANCH: ${{ github.ref_name }}
-          THREATRIX_SERVER_URL: https://app.threatrix.io
-        run: |
-          java -jar /opt/threatrix/threat-agent.jar \
-          --app-name="$GITHUB_REPOSITORY" \
-          --api-key="$THREATRIX_SERVER_API_KEY" \
-          --server-url="$THREATRIX_SERVER_URL" --scm GITHUB \
-          --lowmem \
-          --env prod \
-          --verbose \
-          --eid=$EID \
-          --oid=$OID \
-          --branch=$BRANCH \
-          --scm-auth-token="$SCM_TOKEN"\
-          --progress \
-          $GITHUB_WORKSPACE
+        uses: actions/threat-agent-scan@main
+        with:
+          eid: ${{ vars.EID }}
+          oid: ${{ vars.ORGID }}
+          server-url: 'https://app.threatrix.io'
+          scm-token: ${{ secrets.TOKEN }}
+          api-token: ${{ secrets.THREATRIX_SERVER_API_KEY }}
