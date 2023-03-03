@@ -11,7 +11,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Run scan with threat-agent
-        uses: actions/threat-agent-scan@main
+        uses: rmashchenko/threat-agent-scan@main
         with:
           eid: ${{ vars.EID }}
           oid: ${{ vars.ORGID }}
