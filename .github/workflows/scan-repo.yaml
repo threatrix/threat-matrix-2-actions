@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   call-workflow-passing-data:
-    uses: rmashchenko/threat-agent-scan/blob/main/.github/workflows/scan-repo-reusable.yaml@main
+    uses: rmashchenko/threat-agent-scan/.github/workflows/scan-repo-reusable.yaml@main
     with:  
       eid: ${{ vars.EID }}
       oid: ${{ vars.ORGID }}
