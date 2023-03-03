@@ -2,21 +2,9 @@ on:
   push:
   workflow_dispatch:
 jobs:
-  scan-repository:
-    name: Scan repository
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-      - name: Run scan with threat-agent
-        uses: rmashchenko/threat-agent-scan@main
-        with:
-          eid: ${{ vars.EID }}
-          oid: ${{ vars.ORGID }}
-          server-url: 'https://app.threatrix.io'
-          scm-token: ${{ secrets.TOKEN }}
-          api-token: ${{ secrets.THREATRIX_SERVER_API_KEY }}
-          app-name: ${{ github.repository }}
-          branch: ${{ github.ref_name }}
+  call-workflow-passing-data:
+    uses: rmashchenko/threat-agent-scan/blob/main/.github/workflows/scan-repo-reusable.yaml@main
+    with:  
+      eid: ${{ vars.EID }}
+      oid: ${{ vars.ORGID }}
+    secrets: inherit
